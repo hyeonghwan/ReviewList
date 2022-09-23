@@ -10,9 +10,25 @@
 		965A847828DC9F7E001AA1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A847728DC9F7E001AA1EF /* AppDelegate.swift */; };
 		965A847A28DC9F7E001AA1EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A847928DC9F7E001AA1EF /* SceneDelegate.swift */; };
 		965A847C28DC9F7E001AA1EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A847B28DC9F7E001AA1EF /* ViewController.swift */; };
-		965A847F28DC9F7E001AA1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965A847D28DC9F7E001AA1EF /* Main.storyboard */; };
 		965A848128DC9F7F001AA1EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965A848028DC9F7F001AA1EF /* Assets.xcassets */; };
 		965A848428DC9F7F001AA1EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965A848228DC9F7F001AA1EF /* LaunchScreen.storyboard */; };
+		968506FA28DD8BD000387334 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968506F928DD8BD000387334 /* ProfileView.swift */; };
+		968506FD28DD8D5B00387334 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968506FC28DD8D5B00387334 /* ProfileImageView.swift */; };
+		9685070028DD8FA300387334 /* UILabel-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968506FF28DD8FA300387334 /* UILabel-ext.swift */; };
+		9685070328DD922D00387334 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9685070228DD922D00387334 /* SnapKit */; };
+		9685070528DD981F00387334 /* UIButton-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685070428DD981F00387334 /* UIButton-ext.swift */; };
+		9685070B28DD9A3000387334 /* NanumGothic-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685070828DD9A3000387334 /* NanumGothic-ExtraBold.ttf */; };
+		9685070C28DD9A3000387334 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685070928DD9A3000387334 /* NanumGothic-Regular.ttf */; };
+		9685070D28DD9A3000387334 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685070A28DD9A3000387334 /* NanumGothic-Bold.ttf */; };
+		9685071128DD9EAE00387334 /* SeparatorLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071028DD9EAE00387334 /* SeparatorLine.swift */; };
+		9685071328DD9FAB00387334 /* AverageStarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071228DD9FAB00387334 /* AverageStarRatingView.swift */; };
+		9685071528DDA55B00387334 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071428DDA55A00387334 /* ReviewCell.swift */; };
+		9685071728DDAD8100387334 /* UICollectionViewCell-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071628DDAD8100387334 /* UICollectionViewCell-ext.swift */; };
+		9685071928DDC20E00387334 /* ReviewCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */; };
+		9685071B28DDC42300387334 /* UIColor-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071A28DDC42300387334 /* UIColor-ext.swift */; };
+		9685071D28DDCA7D00387334 /* UIImage-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071C28DDCA7D00387334 /* UIImage-ext.swift */; };
+		9685072028DDCC7C00387334 /* ReviewCellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071F28DDCC7C00387334 /* ReviewCellTitle.swift */; };
+		9685072228DDD59600387334 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072128DDD59600387334 /* ProfileCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +36,25 @@
 		965A847728DC9F7E001AA1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		965A847928DC9F7E001AA1EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		965A847B28DC9F7E001AA1EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		965A847E28DC9F7E001AA1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		965A848028DC9F7F001AA1EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		965A848328DC9F7F001AA1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		965A848528DC9F7F001AA1EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		968506F928DD8BD000387334 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		968506FC28DD8D5B00387334 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		968506FF28DD8FA300387334 /* UILabel-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel-ext.swift"; sourceTree = "<group>"; };
+		9685070428DD981F00387334 /* UIButton-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton-ext.swift"; sourceTree = "<group>"; };
+		9685070828DD9A3000387334 /* NanumGothic-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-ExtraBold.ttf"; sourceTree = "<group>"; };
+		9685070928DD9A3000387334 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
+		9685070A28DD9A3000387334 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
+		9685071028DD9EAE00387334 /* SeparatorLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorLine.swift; sourceTree = "<group>"; };
+		9685071228DD9FAB00387334 /* AverageStarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageStarRatingView.swift; sourceTree = "<group>"; };
+		9685071428DDA55A00387334 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		9685071628DDAD8100387334 /* UICollectionViewCell-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell-ext.swift"; sourceTree = "<group>"; };
+		9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewHeader.swift; sourceTree = "<group>"; };
+		9685071A28DDC42300387334 /* UIColor-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-ext.swift"; sourceTree = "<group>"; };
+		9685071C28DDCA7D00387334 /* UIImage-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage-ext.swift"; sourceTree = "<group>"; };
+		9685071F28DDCC7C00387334 /* ReviewCellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellTitle.swift; sourceTree = "<group>"; };
+		9685072128DDD59600387334 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9685070328DD922D00387334 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,12 +91,59 @@
 				965A847728DC9F7E001AA1EF /* AppDelegate.swift */,
 				965A847928DC9F7E001AA1EF /* SceneDelegate.swift */,
 				965A847B28DC9F7E001AA1EF /* ViewController.swift */,
-				965A847D28DC9F7E001AA1EF /* Main.storyboard */,
+				9685071E28DDCC4000387334 /* CollectionViewReuseView */,
+				968506FB28DD8C5700387334 /* Custom View */,
+				968506FE28DD8F9000387334 /* Extension */,
+				9685070E28DD9A3D00387334 /* CusomFont */,
 				965A848028DC9F7F001AA1EF /* Assets.xcassets */,
 				965A848228DC9F7F001AA1EF /* LaunchScreen.storyboard */,
 				965A848528DC9F7F001AA1EF /* Info.plist */,
 			);
 			path = ReviewList;
+			sourceTree = "<group>";
+		};
+		968506FB28DD8C5700387334 /* Custom View */ = {
+			isa = PBXGroup;
+			children = (
+				968506F928DD8BD000387334 /* ProfileView.swift */,
+				9685071228DD9FAB00387334 /* AverageStarRatingView.swift */,
+				968506FC28DD8D5B00387334 /* ProfileImageView.swift */,
+				9685071028DD9EAE00387334 /* SeparatorLine.swift */,
+			);
+			path = "Custom View";
+			sourceTree = "<group>";
+		};
+		968506FE28DD8F9000387334 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				968506FF28DD8FA300387334 /* UILabel-ext.swift */,
+				9685071A28DDC42300387334 /* UIColor-ext.swift */,
+				9685071C28DDCA7D00387334 /* UIImage-ext.swift */,
+				9685071628DDAD8100387334 /* UICollectionViewCell-ext.swift */,
+				9685070428DD981F00387334 /* UIButton-ext.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		9685070E28DD9A3D00387334 /* CusomFont */ = {
+			isa = PBXGroup;
+			children = (
+				9685070A28DD9A3000387334 /* NanumGothic-Bold.ttf */,
+				9685070828DD9A3000387334 /* NanumGothic-ExtraBold.ttf */,
+				9685070928DD9A3000387334 /* NanumGothic-Regular.ttf */,
+			);
+			path = CusomFont;
+			sourceTree = "<group>";
+		};
+		9685071E28DDCC4000387334 /* CollectionViewReuseView */ = {
+			isa = PBXGroup;
+			children = (
+				9685072128DDD59600387334 /* ProfileCell.swift */,
+				9685071428DDA55A00387334 /* ReviewCell.swift */,
+				9685071F28DDCC7C00387334 /* ReviewCellTitle.swift */,
+				9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */,
+			);
+			path = CollectionViewReuseView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +162,9 @@
 			dependencies = (
 			);
 			name = ReviewList;
+			packageProductDependencies = (
+				9685070228DD922D00387334 /* SnapKit */,
+			);
 			productName = ReviewList;
 			productReference = 965A847428DC9F7E001AA1EF /* ReviewList.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +193,9 @@
 				Base,
 			);
 			mainGroup = 965A846B28DC9F7E001AA1EF;
+			packageReferences = (
+				9685070128DD922D00387334 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 965A847528DC9F7E001AA1EF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,9 +210,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9685070B28DD9A3000387334 /* NanumGothic-ExtraBold.ttf in Resources */,
 				965A848428DC9F7F001AA1EF /* LaunchScreen.storyboard in Resources */,
 				965A848128DC9F7F001AA1EF /* Assets.xcassets in Resources */,
-				965A847F28DC9F7E001AA1EF /* Main.storyboard in Resources */,
+				9685070C28DD9A3000387334 /* NanumGothic-Regular.ttf in Resources */,
+				9685070D28DD9A3000387334 /* NanumGothic-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +225,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9685070028DD8FA300387334 /* UILabel-ext.swift in Sources */,
+				9685072028DDCC7C00387334 /* ReviewCellTitle.swift in Sources */,
+				9685071528DDA55B00387334 /* ReviewCell.swift in Sources */,
+				9685071728DDAD8100387334 /* UICollectionViewCell-ext.swift in Sources */,
+				968506FA28DD8BD000387334 /* ProfileView.swift in Sources */,
+				9685070528DD981F00387334 /* UIButton-ext.swift in Sources */,
+				9685071D28DDCA7D00387334 /* UIImage-ext.swift in Sources */,
+				9685071328DD9FAB00387334 /* AverageStarRatingView.swift in Sources */,
 				965A847C28DC9F7E001AA1EF /* ViewController.swift in Sources */,
+				968506FD28DD8D5B00387334 /* ProfileImageView.swift in Sources */,
 				965A847828DC9F7E001AA1EF /* AppDelegate.swift in Sources */,
+				9685071B28DDC42300387334 /* UIColor-ext.swift in Sources */,
 				965A847A28DC9F7E001AA1EF /* SceneDelegate.swift in Sources */,
+				9685072228DDD59600387334 /* ProfileCell.swift in Sources */,
+				9685071928DDC20E00387334 /* ReviewCollectionViewHeader.swift in Sources */,
+				9685071128DD9EAE00387334 /* SeparatorLine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		965A847D28DC9F7E001AA1EF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				965A847E28DC9F7E001AA1EF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		965A848228DC9F7F001AA1EF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +384,6 @@
 				INFOPLIST_FILE = ReviewList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +411,6 @@
 				INFOPLIST_FILE = ReviewList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +448,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9685070128DD922D00387334 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9685070228DD922D00387334 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9685070128DD922D00387334 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 965A846C28DC9F7E001AA1EF /* Project object */;
 }
