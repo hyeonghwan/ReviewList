@@ -26,13 +26,20 @@ class ProfileCell: UICollectionViewCell {
         fatalError("required init fatalError")
         
     }
+    
+    func updateCellComponent(_ profileModel :ProfileModel) {
+        self.profileView.updateCellContent(profileModel)
+    }
+    
     private func configure() {
         
         self.contentView.addSubview(profileView)
         
         profileView.snp.makeConstraints{
             $0.width.equalTo(UIScreen.main.bounds.width)
-            $0.height.equalTo(350)
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(300)
         }
     }
     

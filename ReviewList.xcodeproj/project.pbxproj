@@ -27,8 +27,11 @@
 		9685071928DDC20E00387334 /* ReviewCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */; };
 		9685071B28DDC42300387334 /* UIColor-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071A28DDC42300387334 /* UIColor-ext.swift */; };
 		9685071D28DDCA7D00387334 /* UIImage-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071C28DDCA7D00387334 /* UIImage-ext.swift */; };
-		9685072028DDCC7C00387334 /* ReviewCellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071F28DDCC7C00387334 /* ReviewCellTitle.swift */; };
+		9685072028DDCC7C00387334 /* ReviewCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685071F28DDCC7C00387334 /* ReviewCellTitleView.swift */; };
 		9685072228DDD59600387334 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072128DDD59600387334 /* ProfileCell.swift */; };
+		9685072728DE0B6E00387334 /* HBDActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072628DE0B6E00387334 /* HBDActionView.swift */; };
+		9685072B28DF1C6800387334 /* Int-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072A28DF1C6800387334 /* Int-ext.swift */; };
+		9685072E28DF1CF100387334 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072D28DF1CF100387334 /* ProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,8 +56,11 @@
 		9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewHeader.swift; sourceTree = "<group>"; };
 		9685071A28DDC42300387334 /* UIColor-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-ext.swift"; sourceTree = "<group>"; };
 		9685071C28DDCA7D00387334 /* UIImage-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage-ext.swift"; sourceTree = "<group>"; };
-		9685071F28DDCC7C00387334 /* ReviewCellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellTitle.swift; sourceTree = "<group>"; };
+		9685071F28DDCC7C00387334 /* ReviewCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellTitleView.swift; sourceTree = "<group>"; };
 		9685072128DDD59600387334 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		9685072628DE0B6E00387334 /* HBDActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBDActionView.swift; sourceTree = "<group>"; };
+		9685072A28DF1C6800387334 /* Int-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int-ext.swift"; sourceTree = "<group>"; };
+		9685072D28DF1CF100387334 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +96,8 @@
 			children = (
 				965A847728DC9F7E001AA1EF /* AppDelegate.swift */,
 				965A847928DC9F7E001AA1EF /* SceneDelegate.swift */,
-				965A847B28DC9F7E001AA1EF /* ViewController.swift */,
+				9685072C28DF1CE200387334 /* Model */,
+				9685072928DF1B2900387334 /* ViewController */,
 				9685071E28DDCC4000387334 /* CollectionViewReuseView */,
 				968506FB28DD8C5700387334 /* Custom View */,
 				968506FE28DD8F9000387334 /* Extension */,
@@ -105,9 +112,7 @@
 		968506FB28DD8C5700387334 /* Custom View */ = {
 			isa = PBXGroup;
 			children = (
-				968506F928DD8BD000387334 /* ProfileView.swift */,
 				9685071228DD9FAB00387334 /* AverageStarRatingView.swift */,
-				968506FC28DD8D5B00387334 /* ProfileImageView.swift */,
 				9685071028DD9EAE00387334 /* SeparatorLine.swift */,
 			);
 			path = "Custom View";
@@ -121,6 +126,7 @@
 				9685071C28DDCA7D00387334 /* UIImage-ext.swift */,
 				9685071628DDAD8100387334 /* UICollectionViewCell-ext.swift */,
 				9685070428DD981F00387334 /* UIButton-ext.swift */,
+				9685072A28DF1C6800387334 /* Int-ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -138,12 +144,47 @@
 		9685071E28DDCC4000387334 /* CollectionViewReuseView */ = {
 			isa = PBXGroup;
 			children = (
-				9685072128DDD59600387334 /* ProfileCell.swift */,
-				9685071428DDA55A00387334 /* ReviewCell.swift */,
-				9685071F28DDCC7C00387334 /* ReviewCellTitle.swift */,
-				9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */,
+				9685072828DF19AA00387334 /* ProfileCell */,
+				9685072528DE05A900387334 /* ReviewCell */,
 			);
 			path = CollectionViewReuseView;
+			sourceTree = "<group>";
+		};
+		9685072528DE05A900387334 /* ReviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9685071428DDA55A00387334 /* ReviewCell.swift */,
+				9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */,
+				9685071F28DDCC7C00387334 /* ReviewCellTitleView.swift */,
+				9685072628DE0B6E00387334 /* HBDActionView.swift */,
+			);
+			path = ReviewCell;
+			sourceTree = "<group>";
+		};
+		9685072828DF19AA00387334 /* ProfileCell */ = {
+			isa = PBXGroup;
+			children = (
+				9685072128DDD59600387334 /* ProfileCell.swift */,
+				968506F928DD8BD000387334 /* ProfileView.swift */,
+				968506FC28DD8D5B00387334 /* ProfileImageView.swift */,
+			);
+			path = ProfileCell;
+			sourceTree = "<group>";
+		};
+		9685072928DF1B2900387334 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				965A847B28DC9F7E001AA1EF /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9685072C28DF1CE200387334 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9685072D28DF1CF100387334 /* ProfileModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,21 +267,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				9685070028DD8FA300387334 /* UILabel-ext.swift in Sources */,
-				9685072028DDCC7C00387334 /* ReviewCellTitle.swift in Sources */,
+				9685072028DDCC7C00387334 /* ReviewCellTitleView.swift in Sources */,
 				9685071528DDA55B00387334 /* ReviewCell.swift in Sources */,
 				9685071728DDAD8100387334 /* UICollectionViewCell-ext.swift in Sources */,
+				9685072E28DF1CF100387334 /* ProfileModel.swift in Sources */,
 				968506FA28DD8BD000387334 /* ProfileView.swift in Sources */,
 				9685070528DD981F00387334 /* UIButton-ext.swift in Sources */,
 				9685071D28DDCA7D00387334 /* UIImage-ext.swift in Sources */,
 				9685071328DD9FAB00387334 /* AverageStarRatingView.swift in Sources */,
 				965A847C28DC9F7E001AA1EF /* ViewController.swift in Sources */,
 				968506FD28DD8D5B00387334 /* ProfileImageView.swift in Sources */,
+				9685072728DE0B6E00387334 /* HBDActionView.swift in Sources */,
 				965A847828DC9F7E001AA1EF /* AppDelegate.swift in Sources */,
 				9685071B28DDC42300387334 /* UIColor-ext.swift in Sources */,
 				965A847A28DC9F7E001AA1EF /* SceneDelegate.swift in Sources */,
 				9685072228DDD59600387334 /* ProfileCell.swift in Sources */,
 				9685071928DDC20E00387334 /* ReviewCollectionViewHeader.swift in Sources */,
 				9685071128DD9EAE00387334 /* SeparatorLine.swift in Sources */,
+				9685072B28DF1C6800387334 /* Int-ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

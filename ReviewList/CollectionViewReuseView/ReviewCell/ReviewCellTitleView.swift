@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class ReviewCellTitle: UIView {
+class ReviewCellTitleView: UIView {
     
     private lazy var hstackView: UIStackView = {
         let stackView = UIStackView()
@@ -23,19 +23,19 @@ class ReviewCellTitle: UIView {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.setStoreImageSquare()
-        imageView.image = UIImage(named: "Star")
+        imageView.image = UIImage(named: "store1")
         return imageView
     }()
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.settingNameLabel()
-        label.text = "안녕하세요"
+        label.text = "빡코딩점"
         return label
     }()
     private lazy var storeName: UILabel = {
         let label = UILabel()
         label.settingNameLabel()
-        label.text = "안녕하세요"
+        label.text = "hollo"
         label.font = UIFont(name: "NanumGothicExtraBold", size: 18)
         return label
     }()
@@ -66,11 +66,6 @@ class ReviewCellTitle: UIView {
         return label
     }()
     
-    override var intrinsicContentSize: CGSize {
-          var size = super.intrinsicContentSize
-          return size
-      }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -81,7 +76,7 @@ class ReviewCellTitle: UIView {
         
     }
 }
-private extension ReviewCellTitle {
+private extension ReviewCellTitleView {
     func configure() {
         
         [hstackView,starImageView,starScoreLabel,dateLabel].forEach{

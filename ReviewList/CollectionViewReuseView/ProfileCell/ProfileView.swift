@@ -22,7 +22,6 @@ class ProfileView: UIView {
     
     private lazy var profileImageView: ProfileImageView = {
         let imageView = ProfileImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "pencil")
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.borderWidth = 2
         return imageView
@@ -49,25 +48,64 @@ class ProfileView: UIView {
         stack.axis = .horizontal
         stack.alignment = .center
         stack.distribution = .equalSpacing
-        stack.spacing = 41
+        stack.spacing = 20
         return stack
     }()
     
-    private lazy var followingLabel: UILabel = {
+    private lazy var followingStackview: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 6
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    private lazy var followerStackview: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 6
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    private lazy var followingLabelName: UILabel = {
         let label = UILabel()
         
         label.settingFollowLabel()
-        label.text = "팔로잉 66"
+        label.text = "팔로잉"
         return label
     }()
     
-    private lazy var followerLabel: UILabel = {
+    private lazy var followingCountLabel: UILabel = {
+        let label = UILabel()
+        
+        label.settingFollowLabel()
+        label.text = "10"
+        return label
+    }()
+    
+    private lazy var separatorView: UIView = {
+        let separatorView = UIView()
+        separatorView.backgroundColor = UIColor(red: 0.855, green: 0.859, blue: 0.871, alpha: 1)
+        return separatorView
+    }()
+    
+    private lazy var followerLabelName: UILabel = {
         let label = UILabel()
         label.settingFollowLabel()
-        label.text = "팔로워 66"
+        label.text = "팔로워"
         return label
     }()
     
+    private lazy var followerCountLabel: UILabel = {
+        let label = UILabel()
+        label.settingFollowLabel()
+        label.text = "10"
+        return label
+    }()
+
     private lazy var introduceLabel: UILabel = {
         let label = UILabel()
         label.settingIntroduceLabel()
@@ -89,6 +127,15 @@ class ProfileView: UIView {
         fatalError("error")
     }
     
+    func updateCellContent(_ profileModel: ProfileModel) {
+        let data = profileModel
+        self.profileImageView.image = UIImage(named: data.image)
+        self.nameLabel.text = data.name
+        self.followingCountLabel.text = data.followingCount.toString()
+        self.followerCountLabel.text = data.followerCount.toString()
+        
+    }
+    
 }
 extension ProfileView {
     private func configure() {
@@ -101,20 +148,39 @@ extension ProfileView {
             $0.leading.equalToSuperview().inset(16)
             $0.trailing.equalToSuperview().offset(-30)
         }
+        
         [profileImageView,vStackView].forEach{
             containerStackView.addArrangedSubview($0)
-        }
-        [nameLabel,hStackView].forEach{
-            vStackView.addArrangedSubview($0)
-        }
-        
-        [followingLabel,followerLabel].forEach{
-            hStackView.addArrangedSubview($0)
         }
         
         profileImageView.snp.makeConstraints{
             $0.width.height.equalTo(100)
         }
+        
+        [nameLabel,hStackView].forEach{
+            vStackView.addArrangedSubview($0)
+        }
+        
+        nameLabel.snp.makeConstraints{
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(20)
+        }
+        
+        [followingLabelName,followingCountLabel].forEach{
+            self.followingStackview.addArrangedSubview($0)
+        }
+        [followerLabelName,followerCountLabel].forEach{
+            self.followerStackview.addArrangedSubview($0)
+        }
+        
+        [followingStackview,separatorView,followerStackview].forEach{
+            hStackView.addArrangedSubview($0)
+        }
+        
+        separatorView.snp.makeConstraints{
+            $0.width.equalTo(2)
+            $0.height.equalTo(16)
+        }
+        
         introduceLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(29)
             $0.top.equalTo(containerStackView.snp.bottom).offset(34)
