@@ -8,15 +8,28 @@
 import UIKit
 import SnapKit
 
+
+//화면에 보여질 Cell 종류 enum 값 (profileCell,ReviewCell)
+enum ViewSection : Int{
+    case profile = 0
+    case review = 1
+}
+
+protocol ReviewLineChangeDelegate {
+    func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?)
+}
+
+
 class ViewController: UIViewController {
     
-  
-    let dummyModel = ProfileModel(image: "profileImage", name: "ParkHyeongHwan", followingCount: 101, followerCount: 101)
+    let dummyProfileModel = ProfileModel(image: "profileImage", name: "ParkHyeongHwan", followingCount: 1250000, followerCount: 2500)
+    var reviewModels = [ReviewModel(lineFlag: false), ReviewModel(lineFlag: false)]
+    
     
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-            flowLayout.estimatedItemSize = CGSize(width: (UIScreen.main.bounds.width), height: 2000)
-            flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: ReviewCell.identify)
@@ -31,8 +44,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .tertiarySystemBackground
-        collectionView.reloadData()
         configure()
+        
     }
 
 
@@ -44,18 +57,34 @@ private extension ViewController{
         collectionView.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
+        
     }
 }
 extension ViewController: UICollectionViewDelegateFlowLayout{
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
             let width = UIScreen.main.bounds.width
-            if section == 1{
-                return CGSize(width: width, height: 120)
-            }else {
+            
+            switch ViewSection(rawValue: section){
+            case .profile:
                 return CGSize()
+            case .review:
+                return CGSize(width: width, height: 120)
+            default:
+                assert(false, "headerInSection Error")
             }
         }
 }
+
+extension ViewController: ReviewLineChangeDelegate{
+    
+    func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?) {
+        guard let index = indexPath else {print("ReviewLineChangeDelegate indexPath error"); return}
+        self.reviewModels[index.row] = reviewModel!
+//        self.collectionView.collectionViewLayout.invalidateLayout()
+//        self.collectionView.reloadData()
+    }
+}
+
 
 extension ViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -69,12 +98,15 @@ extension ViewController: UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        
+        //section은 Profile Section, ReviewList Section
+        switch ViewSection(rawValue: section) {
+        case .profile:
             return 1
-        case 1:
-            return 2
+        case .review:
+            return reviewModels.count
         default:
             return 0
         }
@@ -84,6 +116,7 @@ extension ViewController: UICollectionViewDataSource{
        
         switch kind {
         case UICollectionView.elementKindSectionHeader:
+            
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReviewCollectionViewHeader.identify, for: indexPath)
                 return headerView
         default:
@@ -92,21 +125,22 @@ extension ViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
-        if indexPath.section == 0{
+      
+        switch ViewSection(rawValue: indexPath.section){
             
+        case .profile:
             guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.identify, for: indexPath) as? ProfileCell else {print("profile cell nil"); return UICollectionViewCell()}
-            cell.updateCellComponent(dummyModel)
-            return cell
-            
-        }else {
-            
-            guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCell.identify, for: indexPath) as? ReviewCell else {print("profile cell nil"); return UICollectionViewCell()}
+            cell.updateCellComponent(dummyProfileModel)
             
             return cell
+            
+        case .review:
+            guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCell.identify, for: indexPath) as? ReviewCell else {print("review cell nil"); return UICollectionViewCell()}
+            cell.updateSettingUI(self,indexPath,reviewModels[indexPath.row])
+            
+            return cell
+        default :
+            assert(false,"error")
         }
-            
-        
     }
 }

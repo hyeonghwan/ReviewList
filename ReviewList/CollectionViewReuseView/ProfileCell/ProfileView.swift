@@ -15,7 +15,7 @@ class ProfileView: UIView {
        let stackView = UIStackView()
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.spacing = 10
+        stackView.spacing = 8
         stackView.axis = .horizontal
         return stackView
     }()
@@ -80,7 +80,6 @@ class ProfileView: UIView {
     
     private lazy var followingCountLabel: UILabel = {
         let label = UILabel()
-        
         label.settingFollowLabel()
         label.text = "10"
         return label
@@ -146,7 +145,7 @@ extension ProfileView {
         containerStackView.snp.makeConstraints{
             $0.top.equalToSuperview().inset(30)
             $0.leading.equalToSuperview().inset(16)
-            $0.trailing.equalToSuperview().offset(-30)
+            $0.trailing.equalToSuperview()
         }
         
         [profileImageView,vStackView].forEach{
@@ -174,6 +173,10 @@ extension ProfileView {
         
         [followingStackview,separatorView,followerStackview].forEach{
             hStackView.addArrangedSubview($0)
+        }
+        
+        hStackView.snp.makeConstraints{
+            $0.trailing.lessThanOrEqualToSuperview()
         }
         
         separatorView.snp.makeConstraints{

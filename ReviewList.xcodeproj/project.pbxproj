@@ -32,6 +32,7 @@
 		9685072728DE0B6E00387334 /* HBDActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072628DE0B6E00387334 /* HBDActionView.swift */; };
 		9685072B28DF1C6800387334 /* Int-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072A28DF1C6800387334 /* Int-ext.swift */; };
 		9685072E28DF1CF100387334 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072D28DF1CF100387334 /* ProfileModel.swift */; };
+		9685073028E073A300387334 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072F28E073A300387334 /* ReviewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		9685072628DE0B6E00387334 /* HBDActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBDActionView.swift; sourceTree = "<group>"; };
 		9685072A28DF1C6800387334 /* Int-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int-ext.swift"; sourceTree = "<group>"; };
 		9685072D28DF1CF100387334 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		9685072F28E073A300387334 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				9685072D28DF1CF100387334 /* ProfileModel.swift */,
+				9685072F28E073A300387334 /* ReviewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				965A847828DC9F7E001AA1EF /* AppDelegate.swift in Sources */,
 				9685071B28DDC42300387334 /* UIColor-ext.swift in Sources */,
 				965A847A28DC9F7E001AA1EF /* SceneDelegate.swift in Sources */,
+				9685073028E073A300387334 /* ReviewModel.swift in Sources */,
 				9685072228DDD59600387334 /* ProfileCell.swift in Sources */,
 				9685071928DDC20E00387334 /* ReviewCollectionViewHeader.swift in Sources */,
 				9685071128DD9EAE00387334 /* SeparatorLine.swift in Sources */,

@@ -31,6 +31,9 @@ extension UIButton {
 
         let attributedText = NSMutableAttributedString(string: "줄여서 보기", attributes: [NSAttributedString.Key.kern: 0.07])
         self.setAttributedTitle(attributedText, for: .normal)
+        
+        let attributedText2 = NSMutableAttributedString(string: "더보기", attributes: [NSAttributedString.Key.kern: 0.07])
+        self.setAttributedTitle(attributedText2, for: .normal)
     }
     
    

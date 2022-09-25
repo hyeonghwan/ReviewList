@@ -19,7 +19,6 @@ extension UIColor {
         static func | (lightMode: UIColor, darkMode: UIColor) -> UIColor {
             guard #available(iOS 13.0, *) else { return lightMode }
             return UIColor { (traitCollection) -> UIColor in
-                print(traitCollection.userInterfaceStyle.rawValue)
                 return traitCollection.userInterfaceStyle == .light ? lightMode : darkMode
             }
         }

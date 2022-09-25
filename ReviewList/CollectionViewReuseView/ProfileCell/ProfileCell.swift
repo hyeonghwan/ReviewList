@@ -22,12 +22,14 @@ class ProfileCell: UICollectionViewCell {
         configure()
         
     }
+    
     required init?(coder: NSCoder) {
         fatalError("required init fatalError")
         
     }
     
     func updateCellComponent(_ profileModel :ProfileModel) {
+        
         self.profileView.updateCellContent(profileModel)
     }
     
@@ -37,6 +39,7 @@ class ProfileCell: UICollectionViewCell {
         
         profileView.snp.makeConstraints{
             $0.width.equalTo(UIScreen.main.bounds.width)
+            $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
             $0.height.equalTo(300)
