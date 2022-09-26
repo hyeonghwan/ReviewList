@@ -45,6 +45,4 @@ class ProfileCell: UICollectionViewCell {
             $0.height.equalTo(300)
         }
     }
-    
-    
 }
