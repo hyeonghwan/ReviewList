@@ -23,23 +23,25 @@ protocol ReviewLineChangeDelegate {
 class ViewController: UIViewController {
     
     let dummyProfileModel = ProfileModel(image: "profileImage", name: "ParkHyeongHwan", followingCount: 1250000, followerCount: 2500)
-    var reviewModels = [ReviewModel(lineFlag: false), ReviewModel(lineFlag: false)]
+    var reviewModels = [ ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false)]
     
     
     private lazy var collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: ReviewCell.identify)
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.identify)
         collectionView.register(ReviewCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: ReviewCollectionViewHeader.identify)
-        
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        collectionView.reloadData()
         return collectionView
     }()
+    
+
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +65,7 @@ private extension ViewController{
 extension ViewController: UICollectionViewDelegateFlowLayout{
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
             let width = UIScreen.main.bounds.width
-            
+
             switch ViewSection(rawValue: section){
             case .profile:
                 return CGSize()
@@ -73,6 +75,35 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
                 assert(false, "headerInSection Error")
             }
         }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(10)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if ViewSection(rawValue: indexPath.section) == .review{
+            let reviewCell = ReviewCell()
+            
+            let width = collectionView.frame.size.width
+            reviewCell.contentView.bounds.size.width = width
+    
+            reviewCell.updateSettingUI(self, indexPath, reviewModels[indexPath.row])
+            
+            reviewCell.contentView.setNeedsLayout()
+            reviewCell.contentView.layoutIfNeeded()
+            
+            // uiview.layoutFittingCompressedSize -> 뷰의 적절한 최소 크기 반환
+            let height = reviewCell.contentView.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)).height
+            
+            reviewCell.prepareForReuse()
+            
+            return CGSize(width: width, height: height)
+        }
+        return CGSize(width: self.view.frame.width, height: 300)
+    }
 }
 
 extension ViewController: ReviewLineChangeDelegate{
@@ -80,10 +111,12 @@ extension ViewController: ReviewLineChangeDelegate{
     func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?) {
         guard let index = indexPath else {print("ReviewLineChangeDelegate indexPath error"); return}
         self.reviewModels[index.row] = reviewModel!
-//        self.collectionView.collectionViewLayout.invalidateLayout()
-//        self.collectionView.reloadData()
+        self.collectionView.collectionViewLayout.invalidateLayout()
+        self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        self.collectionView.reloadItems(at: [index] )
     }
 }
+
 
 
 extension ViewController: UICollectionViewDelegate{
@@ -122,6 +155,7 @@ extension ViewController: UICollectionViewDataSource{
         default:
             assert(false)
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -142,5 +176,14 @@ extension ViewController: UICollectionViewDataSource{
         default :
             assert(false,"error")
         }
+    }
+}
+
+
+extension UICollectionView {
+    var widestCellWidth: CGFloat {
+        let insets = contentInset.left + contentInset.right
+        
+        return bounds.width - insets
     }
 }
