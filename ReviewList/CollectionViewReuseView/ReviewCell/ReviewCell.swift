@@ -11,15 +11,15 @@ import SnapKit
 
 class ReviewCell: UICollectionViewCell{
     
-    private var lineChangeDelegate: ReviewLineChangeDelegate?
+    private var lineChangeDelegate: ReviewCellDelegate?
     private var indexPath: IndexPath?
     private var reviewModel: ReviewModel?
    
-    var reloadLine: (() -> Void)? {
-        didSet{
-            print("setting reload Line")
-        }
-    }
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
     
     private lazy var titleView: ReviewCellTitleView = {
         let view = ReviewCellTitleView()
@@ -36,13 +36,12 @@ class ReviewCell: UICollectionViewCell{
     private lazy var reviewContent: UILabel = {
         let label = UILabel()
         label.settingReviewContent()
+        label.numberOfLines = 5
         return label
     }()
     
-    private lazy var changeLineButton: UIButton = {
-        let button = UIButton()
-        button.settingChangeLineButton()
-        button.backgroundColor = .white
+    private lazy var changeLineButton: ChangeLineButton = {
+        let button = ChangeLineButton()
         return button
     }()
     
@@ -58,114 +57,88 @@ class ReviewCell: UICollectionViewCell{
         changeLineButton.addTarget(self, action: #selector(changeLine(_ :)), for: .touchUpInside)
        
     }
+    
     @objc func changeLine(_ sender: UIButton) {
         print("changeLinechangeLinechangeLine")
         guard var model = reviewModel else {return}
         model.lineFlag.toggle()
         reviewModel = model
+        
+        UIView.animate(
+          withDuration: 0.3,
+          delay: 0,
+          options: .curveEaseInOut,
+          animations: {
+              self.reviewContent.alpha = 0
+              self.changeLineButton.alpha = 0
+              self.layoutIfNeeded()
+          },
+          completion: nil
+        )
+        
+        
         self.lineChangeDelegate?.changeReviewContentLine(self.indexPath,reviewModel)
     }
-    func updateSettingUI(_ delegate: ReviewLineChangeDelegate,_ indexPath: IndexPath,_ reviewModel: ReviewModel){
-        self.lineChangeDelegate = delegate
+    
+    func calculateViewHeight(_ indexPath: IndexPath,_ reviewModel: ReviewModel){
         self.indexPath = indexPath
         self.reviewModel = reviewModel
         self.reviewContent.text = reviewModel.content
         self.reviewContent.numberOfLines = self.reviewModel!.lineFlag ? 0 : 5
-        print("updateSettingUI")
+    }
+    
+    func updateSettingUI(_ delegate: ReviewCellDelegate,_ indexPath: IndexPath,_ reviewModel: ReviewModel){
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        self.lineChangeDelegate = delegate
+        self.indexPath = indexPath
+        self.reviewModel = reviewModel
+        self.reviewContent.text = reviewModel.content
+        
+        self.reviewContent.alpha = 1
+        self.changeLineButton.alpha = 1
+        
+        self.reviewContent.numberOfLines = self.reviewModel!.lineFlag ? 0 : 5
+        self.reviewContent.sizeToFit()
+        self.changeLineButton.setTitle(line: self.reviewContent.numberOfLines,
+                                       count: self.reviewContent.maxNumberOfLines,
+                                       for: .normal)
+            self.actionView.updateHeart(delegate,indexPath,reviewModel)
+       
+        
+        
     }
     
     override func prepareForReuse() {
-        print("prepareForReuse")
         self.reviewContent.text = nil
-//        self.reviewContent.numberOfLines = 5
+        
         self.reviewModel = nil
         self.indexPath = nil
         self.lineChangeDelegate = nil
         
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        print("contentView -> \(self.contentView.frame) \n selfNUMBER -> \(self.reviewContent.numberOfLines)")
-        
-        
-    }
-
     
     required init?(coder: NSCoder) {
         fatalError("required init fatalError")
         
     }
-
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        //Exhibit A - We need to cache our calculation to prevent a crash.
-//            setNeedsLayout()
-//            layoutIfNeeded()
-//            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-//            var newFrame = layoutAttributes.frame
-//
-//        let targetSize = CGSize(width: UIScreen.main.bounds.width, height: 0)
-//
-//         let width =  contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
-//            print("newFrame -> \(newFrame)")
-//            layoutAttributes.frame = newFrame
-//
-//        return layoutAttributes
-//    }
-    
-//    override func systemLayoutSizeFitting(
-//          _ targetSize: CGSize, withHorizontalFittingPriority
-//          horizontalFittingPriority: UILayoutPriority,
-//          verticalFittingPriority: UILayoutPriority) -> CGSize {
-//
-//              setNeedsLayout()
-//              layoutIfNeeded()
-//
-//              var targetSize = targetSize
-//              targetSize.height = CGFloat.greatestFiniteMagnitude
-//              let size = super.systemLayoutSizeFitting(
-//                targetSize,
-//                withHorizontalFittingPriority: .required,
-//                verticalFittingPriority: .fittingSizeLevel)
-//
-//              print("\(#function) \(#line) \(targetSize) -> \(size)")
-//              return size
-//          }
-    
-//    
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//
-//        if !isHeightCalculated {
-//            setNeedsLayout()
-//            layoutIfNeeded()
-//            print("preferredLayoutAttributesFitting")
-//            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-//            var frame = layoutAttributes.frame
-//            frame.size.width = UIScreen.main.bounds.width
-//            frame.size.height = size.height
-//            layoutAttributes.frame = frame
-//            isHeightCalculated = true
-//        }
-//        return layoutAttributes
-//    }
-    
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//            self.reviewContent.preferredMaxLayoutWidth = layoutAttributes.size.width
-//            layoutAttributes.bounds.size.height = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-//            isHeightCalculated = true
-//            return layoutAttributes
-//        }
-    
 }
 private extension ReviewCell {
     func configure() {
-        self.contentView.backgroundColor = .brown
        
-        [titleView,reviewTitle,reviewContent,changeLineButton,actionView].forEach{
+        [separatorView,titleView,reviewTitle,reviewContent,changeLineButton,actionView].forEach{
             self.contentView.addSubview($0)
+        }
+        separatorView.snp.makeConstraints{
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(2)
         }
       
         titleView.snp.makeConstraints{
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalTo(separatorView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(180)
         }
         reviewTitle.snp.makeConstraints{
@@ -175,7 +148,6 @@ private extension ReviewCell {
             $0.height.equalTo(25)
         }
         reviewContent.snp.makeConstraints{
-            
             $0.top.equalTo(reviewTitle.snp.bottom).offset(23)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
@@ -184,15 +156,12 @@ private extension ReviewCell {
             $0.top.equalTo(reviewContent.snp.bottom).offset(20)
             $0.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(25)
-           
         }
         actionView.snp.makeConstraints{
-            $0.top.equalTo(changeLineButton.snp.bottom).offset(25)
-            $0.height.equalTo(50)
+            $0.top.equalTo(changeLineButton.snp.bottom)
+            $0.height.equalTo(80)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        
-        
     }
 }

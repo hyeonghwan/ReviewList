@@ -127,6 +127,7 @@ class ProfileView: UIView {
     }
     
     func updateCellContent(_ profileModel: ProfileModel) {
+        
         let data = profileModel
         self.profileImageView.image = UIImage(named: data.image)
         self.nameLabel.text = data.name

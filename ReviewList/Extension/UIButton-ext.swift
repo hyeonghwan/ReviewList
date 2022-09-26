@@ -22,22 +22,6 @@ extension UIButton {
         self.layer.cornerRadius = 16
     }
     
-    func settingChangeLineButton() {
-        self.frame = CGRect(x: 0, y: 0, width: 71, height: 16)
-        self.backgroundColor = .clear
-
-        self.tintColor = UIColor(red: 0.425, green: 0.391, blue: 0.391, alpha: 1) | UIColor.systemGray6
-        self.titleLabel?.font = UIFont(name: "NanumGothic", size: 14)
-
-        let attributedText = NSMutableAttributedString(string: "줄여서 보기", attributes: [NSAttributedString.Key.kern: 0.07])
-        self.setAttributedTitle(attributedText, for: .normal)
-        
-        let attributedText2 = NSMutableAttributedString(string: "더보기", attributes: [NSAttributedString.Key.kern: 0.07])
-        self.setAttributedTitle(attributedText2, for: .normal)
-    }
-    
-   
-    
     func settingBubbleButton() {
         
     }

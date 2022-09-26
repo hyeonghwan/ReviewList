@@ -12,6 +12,8 @@
 		965A847C28DC9F7E001AA1EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A847B28DC9F7E001AA1EF /* ViewController.swift */; };
 		965A848128DC9F7F001AA1EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965A848028DC9F7F001AA1EF /* Assets.xcassets */; };
 		965A848428DC9F7F001AA1EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965A848228DC9F7F001AA1EF /* LaunchScreen.storyboard */; };
+		96639F0A28E1B39B000F7255 /* ChangeLineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96639F0928E1B39B000F7255 /* ChangeLineButton.swift */; };
+		96639F0C28E1DB67000F7255 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96639F0B28E1DB67000F7255 /* HeartButton.swift */; };
 		968506FA28DD8BD000387334 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968506F928DD8BD000387334 /* ProfileView.swift */; };
 		968506FD28DD8D5B00387334 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968506FC28DD8D5B00387334 /* ProfileImageView.swift */; };
 		9685070028DD8FA300387334 /* UILabel-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968506FF28DD8FA300387334 /* UILabel-ext.swift */; };
@@ -43,6 +45,8 @@
 		965A848028DC9F7F001AA1EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		965A848328DC9F7F001AA1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		965A848528DC9F7F001AA1EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96639F0928E1B39B000F7255 /* ChangeLineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLineButton.swift; sourceTree = "<group>"; };
+		96639F0B28E1DB67000F7255 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		968506F928DD8BD000387334 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		968506FC28DD8D5B00387334 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		968506FF28DD8FA300387334 /* UILabel-ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel-ext.swift"; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				9685071828DDC20E00387334 /* ReviewCollectionViewHeader.swift */,
 				9685071F28DDCC7C00387334 /* ReviewCellTitleView.swift */,
 				9685072628DE0B6E00387334 /* HBDActionView.swift */,
+				96639F0B28E1DB67000F7255 /* HeartButton.swift */,
+				96639F0928E1B39B000F7255 /* ChangeLineButton.swift */,
 			);
 			path = ReviewCell;
 			sourceTree = "<group>";
@@ -278,6 +284,7 @@
 				9685070528DD981F00387334 /* UIButton-ext.swift in Sources */,
 				9685071D28DDCA7D00387334 /* UIImage-ext.swift in Sources */,
 				9685071328DD9FAB00387334 /* AverageStarRatingView.swift in Sources */,
+				96639F0C28E1DB67000F7255 /* HeartButton.swift in Sources */,
 				965A847C28DC9F7E001AA1EF /* ViewController.swift in Sources */,
 				968506FD28DD8D5B00387334 /* ProfileImageView.swift in Sources */,
 				9685072728DE0B6E00387334 /* HBDActionView.swift in Sources */,
@@ -286,6 +293,7 @@
 				965A847A28DC9F7E001AA1EF /* SceneDelegate.swift in Sources */,
 				9685073028E073A300387334 /* ReviewModel.swift in Sources */,
 				9685072228DDD59600387334 /* ProfileCell.swift in Sources */,
+				96639F0A28E1B39B000F7255 /* ChangeLineButton.swift in Sources */,
 				9685071928DDC20E00387334 /* ReviewCollectionViewHeader.swift in Sources */,
 				9685071128DD9EAE00387334 /* SeparatorLine.swift in Sources */,
 				9685072B28DF1C6800387334 /* Int-ext.swift in Sources */,

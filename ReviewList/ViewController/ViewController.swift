@@ -15,15 +15,17 @@ enum ViewSection : Int{
     case review = 1
 }
 
-protocol ReviewLineChangeDelegate {
+//review Cell 이벤트 감지 프로토콜
+protocol ReviewCellDelegate {
     func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?)
+    func updateHeartPresent(_ indexPath: IndexPath?, _ reviewModel: ReviewModel?)
 }
 
 
 class ViewController: UIViewController {
     
     let dummyProfileModel = ProfileModel(image: "profileImage", name: "ParkHyeongHwan", followingCount: 1250000, followerCount: 2500)
-    var reviewModels = [ ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false)]
+    var reviewModels = [ ReviewModel(lineFlag: false,content: "prakrkasfjkfal;"),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false)]
     
     
     private lazy var collectionView: UICollectionView = {
@@ -63,6 +65,7 @@ private extension ViewController{
     }
 }
 extension ViewController: UICollectionViewDelegateFlowLayout{
+    
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
             let width = UIScreen.main.bounds.width
 
@@ -75,6 +78,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
                 assert(false, "headerInSection Error")
             }
         }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(10)
     }
@@ -90,7 +94,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
             let width = collectionView.frame.size.width
             reviewCell.contentView.bounds.size.width = width
     
-            reviewCell.updateSettingUI(self, indexPath, reviewModels[indexPath.row])
+            reviewCell.calculateViewHeight( indexPath, reviewModels[indexPath.row])
             
             reviewCell.contentView.setNeedsLayout()
             reviewCell.contentView.layoutIfNeeded()
@@ -106,14 +110,22 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
-extension ViewController: ReviewLineChangeDelegate{
+extension ViewController: ReviewCellDelegate{
+    func updateHeartPresent(_ indexPath: IndexPath?, _ reviewModel: ReviewModel?) {
+        guard let index = indexPath else {print("updateHeartPresent indexPath error"); return}
+        guard let reviewModel = reviewModel else {print("updateHeartPresent not error"); return}
+        self.reviewModels[index.row] = reviewModel
+    }
+    
     
     func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?) {
         guard let index = indexPath else {print("ReviewLineChangeDelegate indexPath error"); return}
         self.reviewModels[index.row] = reviewModel!
-        self.collectionView.collectionViewLayout.invalidateLayout()
-        self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        self.collectionView.reloadItems(at: [index] )
+        collectionView.performBatchUpdates({}) { _ in
+            self.collectionView.reloadItems(at: [index] )
+//            self.collectionView.layoutIfNeeded()
+           }
+        
     }
 }
 
