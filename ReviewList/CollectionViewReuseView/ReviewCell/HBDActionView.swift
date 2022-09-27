@@ -12,7 +12,11 @@ import SnapKit
 class HBDActionView: UIView {
     
     private var heartDelegate: ReviewCellDelegate?
-    private var heart: Bool = false
+    private var heart: Bool? {
+        didSet{
+            heartButton.isSelect = self.heart!
+        }
+    }
     private var reviewModel: ReviewModel?
     private var indexPath: IndexPath?
     
@@ -110,10 +114,15 @@ class HBDActionView: UIView {
     }
     
     @objc func heartTapped(_ sender: UIButton){
-        heart.toggle()
-        heartButton.isSelect = heart
-        self.reviewModel?.heart = heartButton.isSelect
-        self.heartDelegate?.updateHeartPresent(self.indexPath, self.reviewModel)
+        
+        if var heart = heart {
+            self.heart?.toggle()
+            let generator = UIImpactFeedbackGenerator(style: .soft)
+            generator.impactOccurred()
+            heartButton.isSelect = self.heart!
+            self.reviewModel?.heart = heartButton.isSelect
+            self.heartDelegate?.updateHeartPresent(self.indexPath, self.reviewModel)
+        }
         
     }
 }

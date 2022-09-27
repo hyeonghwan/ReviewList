@@ -59,7 +59,7 @@ class ReviewCell: UICollectionViewCell{
     }
     
     @objc func changeLine(_ sender: UIButton) {
-        print("changeLinechangeLinechangeLine")
+        
         guard var model = reviewModel else {return}
         model.lineFlag.toggle()
         reviewModel = model
@@ -76,6 +76,8 @@ class ReviewCell: UICollectionViewCell{
           completion: nil
         )
         
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
         
         self.lineChangeDelegate?.changeReviewContentLine(self.indexPath,reviewModel)
     }
@@ -104,7 +106,8 @@ class ReviewCell: UICollectionViewCell{
         self.changeLineButton.setTitle(line: self.reviewContent.numberOfLines,
                                        count: self.reviewContent.maxNumberOfLines,
                                        for: .normal)
-            self.actionView.updateHeart(delegate,indexPath,reviewModel)
+        self.actionView.updateHeart(delegate,indexPath,reviewModel)
+        
        
         
         

@@ -115,6 +115,7 @@ extension ViewController: ReviewCellDelegate{
         guard let index = indexPath else {print("updateHeartPresent indexPath error"); return}
         guard let reviewModel = reviewModel else {print("updateHeartPresent not error"); return}
         self.reviewModels[index.row] = reviewModel
+        self.collectionView.reloadData()
     }
     
     
