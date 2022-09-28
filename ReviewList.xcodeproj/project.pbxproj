@@ -35,6 +35,11 @@
 		9685072B28DF1C6800387334 /* Int-ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072A28DF1C6800387334 /* Int-ext.swift */; };
 		9685072E28DF1CF100387334 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072D28DF1CF100387334 /* ProfileModel.swift */; };
 		9685073028E073A300387334 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685072F28E073A300387334 /* ReviewModel.swift */; };
+		96F0E1C428E4787C00DDFE8D /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 96F0E1C328E4787C00DDFE8D /* RxBlocking */; };
+		96F0E1C628E4787C00DDFE8D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 96F0E1C528E4787C00DDFE8D /* RxCocoa */; };
+		96F0E1C828E4787C00DDFE8D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 96F0E1C728E4787C00DDFE8D /* RxRelay */; };
+		96F0E1CA28E4787C00DDFE8D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 96F0E1C928E4787C00DDFE8D /* RxSwift */; };
+		96F0E1CC28E4787C00DDFE8D /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 96F0E1CB28E4787C00DDFE8D /* RxTest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +79,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F0E1C628E4787C00DDFE8D /* RxCocoa in Frameworks */,
 				9685070328DD922D00387334 /* SnapKit in Frameworks */,
+				96F0E1CA28E4787C00DDFE8D /* RxSwift in Frameworks */,
+				96F0E1C828E4787C00DDFE8D /* RxRelay in Frameworks */,
+				96F0E1CC28E4787C00DDFE8D /* RxTest in Frameworks */,
+				96F0E1C428E4787C00DDFE8D /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +224,11 @@
 			name = ReviewList;
 			packageProductDependencies = (
 				9685070228DD922D00387334 /* SnapKit */,
+				96F0E1C328E4787C00DDFE8D /* RxBlocking */,
+				96F0E1C528E4787C00DDFE8D /* RxCocoa */,
+				96F0E1C728E4787C00DDFE8D /* RxRelay */,
+				96F0E1C928E4787C00DDFE8D /* RxSwift */,
+				96F0E1CB28E4787C00DDFE8D /* RxTest */,
 			);
 			productName = ReviewList;
 			productReference = 965A847428DC9F7E001AA1EF /* ReviewList.app */;
@@ -245,6 +260,7 @@
 			mainGroup = 965A846B28DC9F7E001AA1EF;
 			packageReferences = (
 				9685070128DD922D00387334 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 965A847528DC9F7E001AA1EF /* Products */;
 			projectDirPath = "";
@@ -514,6 +530,14 @@
 				kind = branch;
 			};
 		};
+		96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -521,6 +545,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9685070128DD922D00387334 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		96F0E1C328E4787C00DDFE8D /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		96F0E1C528E4787C00DDFE8D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		96F0E1C728E4787C00DDFE8D /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		96F0E1C928E4787C00DDFE8D /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		96F0E1CB28E4787C00DDFE8D /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96F0E1C228E4787C00DDFE8D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
