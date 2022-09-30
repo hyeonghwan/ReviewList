@@ -11,9 +11,9 @@ import SnapKit
 
 class ReviewCell: UICollectionViewCell{
     
-    private var lineChangeDelegate: ReviewCellDelegate?
+    private var lineChangeDelegate: ReviewActionDelegate?
     private var indexPath: IndexPath?
-    private var reviewModel: ReviewModel?
+    private var reviewModel: ReviewCellModel?
    
     private lazy var separatorView: UIView = {
         let view = UIView()
@@ -29,10 +29,19 @@ class ReviewCell: UICollectionViewCell{
     private lazy var reviewTitle: UILabel = {
         let label = UILabel()
         label.settingReviewTitle()
-        
         return label
     }()
 
+    
+    private lazy var vStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .top
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
     private lazy var reviewContent: UILabel = {
         let label = UILabel()
         label.settingReviewContent()
@@ -42,6 +51,7 @@ class ReviewCell: UICollectionViewCell{
     
     private lazy var changeLineButton: ChangeLineButton = {
         let button = ChangeLineButton()
+        
         return button
     }()
     
@@ -54,6 +64,7 @@ class ReviewCell: UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        
         changeLineButton.addTarget(self, action: #selector(changeLine(_ :)), for: .touchUpInside)
        
     }
@@ -65,15 +76,15 @@ class ReviewCell: UICollectionViewCell{
         reviewModel = model
         
         UIView.animate(
-          withDuration: 0.3,
-          delay: 0,
-          options: .curveEaseInOut,
-          animations: {
-              self.reviewContent.alpha = 0
-              self.changeLineButton.alpha = 0
-              self.layoutIfNeeded()
-          },
-          completion: nil
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: {
+                self.reviewContent.alpha = 0
+                self.changeLineButton.alpha = 0
+                self.layoutIfNeeded()
+            },
+            completion: nil
         )
         
         let generator = UIImpactFeedbackGenerator(style: .soft)
@@ -82,14 +93,17 @@ class ReviewCell: UICollectionViewCell{
         self.lineChangeDelegate?.changeReviewContentLine(self.indexPath,reviewModel)
     }
     
-    func calculateViewHeight(_ indexPath: IndexPath,_ reviewModel: ReviewModel){
+    func calculateViewHeight(_ indexPath: IndexPath,_ reviewModel: ReviewCellModel){
         self.indexPath = indexPath
         self.reviewModel = reviewModel
         self.reviewContent.text = reviewModel.content
         self.reviewContent.numberOfLines = self.reviewModel!.lineFlag ? 0 : 5
+        
     }
     
-    func updateSettingUI(_ delegate: ReviewCellDelegate,_ indexPath: IndexPath,_ reviewModel: ReviewModel){
+    func updateSettingUI(_ delegate: ReviewActionDelegate,
+                         _ indexPath: IndexPath,
+                         _ reviewModel: ReviewCellModel){
         setNeedsLayout()
         layoutIfNeeded()
         
@@ -103,19 +117,20 @@ class ReviewCell: UICollectionViewCell{
         
         self.reviewContent.numberOfLines = self.reviewModel!.lineFlag ? 0 : 5
         self.reviewContent.sizeToFit()
+        
+        self.changeLineButton.isHidden = false
         self.changeLineButton.setTitle(line: self.reviewContent.numberOfLines,
-                                       count: self.reviewContent.maxNumberOfLines,
+                                       count: self.reviewContent.calculateMaxLines(CGSize(width: self.reviewContent.bounds.width,height: CGFloat.infinity)),
                                        for: .normal)
+        
         self.actionView.updateHeart(delegate,indexPath,reviewModel)
         
-       
-        
+        self.titleView.updateTitleUI(reviewModel.reviewCellTitleData)
         
     }
     
     override func prepareForReuse() {
         self.reviewContent.text = nil
-        
         self.reviewModel = nil
         self.indexPath = nil
         self.lineChangeDelegate = nil
@@ -124,13 +139,13 @@ class ReviewCell: UICollectionViewCell{
     
     required init?(coder: NSCoder) {
         fatalError("required init fatalError")
-        
     }
+    
 }
 private extension ReviewCell {
     func configure() {
        
-        [separatorView,titleView,reviewTitle,reviewContent,changeLineButton,actionView].forEach{
+        [separatorView,titleView,reviewTitle,vStackView,actionView].forEach{
             self.contentView.addSubview($0)
         }
         separatorView.snp.makeConstraints{
@@ -150,18 +165,26 @@ private extension ReviewCell {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(25)
         }
-        reviewContent.snp.makeConstraints{
+        
+        vStackView.snp.makeConstraints{
             $0.top.equalTo(reviewTitle.snp.bottom).offset(23)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
+        
+        
+        [reviewContent,changeLineButton].forEach{
+            vStackView.addArrangedSubview($0)
+        }
+        
+        reviewContent.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview()
+        }
        
         changeLineButton.snp.makeConstraints{
-            $0.top.equalTo(reviewContent.snp.bottom).offset(20)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(25)
+            $0.trailing.equalToSuperview()
         }
         actionView.snp.makeConstraints{
-            $0.top.equalTo(changeLineButton.snp.bottom)
+            $0.top.equalTo(vStackView.snp.bottom)
             $0.height.equalTo(80)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()

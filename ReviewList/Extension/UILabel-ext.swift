@@ -11,25 +11,15 @@ import UIKit
 
 extension UILabel {
     
-    func calculateMaxLines() -> Int {
-        
-        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+    func calculateMaxLines(_ frame: CGSize) -> Int {
+        let maxSize = frame
         let charSize = font.lineHeight
         let text = (self.text ?? "") as NSString
-        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
+        let textSize = text.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
                                          attributes: [NSAttributedString.Key.font: font!], context: nil)
         let linesRoundedUp = Int(ceil(textSize.height/charSize))
         return linesRoundedUp
-        }
-    
-    var maxNumberOfLines: Int {
-           let maxSize = CGSize(width: frame.size.width, height: CGFloat(MAXFLOAT))
-           let text = (self.text ?? "") as NSString
-           let textHeight = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [.font: font!], context: nil).height
-           let lineHeight = font.lineHeight
-           return Int(ceil(textHeight / lineHeight))
-       }
-
+    }
     
     func settingNameLabel() {
         self.backgroundColor = .clear
@@ -38,6 +28,7 @@ extension UILabel {
         self.attributedText = NSMutableAttributedString(string: "",
                                                         attributes: [NSAttributedString.Key.kern : 0.1])
     }
+    
     func settingFollowLabel() {
         self.backgroundColor = .clear
         self.textColor = .label
@@ -81,13 +72,13 @@ extension UILabel {
         self.backgroundColor = .clear
         self.textColor = UIColor(red: 0.169, green: 0.169, blue: 0.169, alpha: 1) | UIColor.label
         self.font = UIFont(name: "NanumGothicBold", size: 14)
-        self.attributedText = NSMutableAttributedString(string: "너무 너무 맛없", attributes: [NSAttributedString.Key.kern: 0.07])
+        self.attributedText = NSMutableAttributedString(string: "너무 너무 맛있어요!", attributes: [NSAttributedString.Key.kern: 0.07])
     }
     
     func settingReviewContent() {
        
         self.backgroundColor = .clear
-
+        
         self.textColor = UIColor(red: 0.169, green: 0.169, blue: 0.169, alpha: 1) | UIColor.label
         self.font = UIFont(name: "NanumGothic", size: 12)
         self.lineBreakMode = .byWordWrapping

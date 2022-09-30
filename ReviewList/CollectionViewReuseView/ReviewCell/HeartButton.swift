@@ -12,20 +12,14 @@ class HeartButton: UIButton {
     
     var isSelect: Bool = false{
         didSet{
-            if isSelect == true{
-                self.setBackgroundImage(UIImage(named: "heart.fill"), for: .normal)
-            }else{
-                self.setBackgroundImage(UIImage(named: "heart"), for: .normal)
-            }
+            
+            isSelect == true ?
+            self.setBackgroundImage(UIImage(named: "heart.fill"), for: .normal)
+            :
+            self.setBackgroundImage(UIImage(named: "heart"), for: .normal)
+            
         }
-    }
-  
-//    override var isSelected: Bool {
-//        didSet{
-//            print(self.isSelected)
-//        }
-//    }
-//    
+    } 
     
     override init(frame: CGRect) {
         super.init(frame: frame)

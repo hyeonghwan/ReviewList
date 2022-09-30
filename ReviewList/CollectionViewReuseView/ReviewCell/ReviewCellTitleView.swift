@@ -23,20 +23,17 @@ class ReviewCellTitleView: UIView {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.setStoreImageSquare()
-        imageView.image = UIImage(named: "store1")
         return imageView
     }()
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.settingNameLabel()
-        label.text = "빡코딩점"
         return label
     }()
     private lazy var storeName: UILabel = {
         let label = UILabel()
         label.settingNameLabel()
-        label.text = "hollo"
-        label.font = UIFont(name: "NanumGothicExtraBold", size: 18)
+        label.font = UIFont(name: "NanumGothic", size: 18)
         return label
     }()
     private lazy var vStackView: UIStackView = {
@@ -56,12 +53,10 @@ class ReviewCellTitleView: UIView {
     private lazy var starScoreLabel: UILabel = {
         let label = UILabel()
         label.settingNameLabel()
-        label.text = "1.0"
         return label
     }()
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "2022.08.08"
         label.font = UIFont(name: "NanumGothic", size: 12)
         return label
     }()
@@ -71,10 +66,20 @@ class ReviewCellTitleView: UIView {
         configure()
         
     }
-    required init?(coder: NSCoder) {
-        fatalError("required init fatalError")
+    
+    func updateTitleUI(_ titleContext: ReviewCellModel.ReviewCellTitleModel) {
+        self.profileImageView.image = UIImage(named: titleContext.storeTitleImage)
+        self.nameLabel.text = titleContext.storeTitleName
+        self.storeName.text = titleContext.storeTitleRegion
+        self.dateLabel.text = titleContext.date
+        self.starScoreLabel.text = titleContext.starRating
         
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("required init fatalError")
+    }
+    
 }
 private extension ReviewCellTitleView {
     func configure() {
