@@ -15,76 +15,108 @@ enum ViewSection : Int{
     case review = 1
 }
 
-//review Cell 이벤트 감지 프로토콜
-protocol ReviewCellDelegate {
-    func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?)
-    func updateHeartPresent(_ indexPath: IndexPath?, _ reviewModel: ReviewModel?)
+/// review Cell 이벤트 감지 프로토콜
+/// 1. 더보기
+/// 2. heart action
+/// 3. declare action
+protocol ChangeLineDelegate  {
+    func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewCellModel?)
 }
+
+protocol UpdateHeartPresent {
+    func updateHeartPresent(_ indexPath: IndexPath?, _ reviewModel: ReviewCellModel?)
+}
+
+
+protocol DeclareEventProtocol {
+    func declareTappedEvent(_ indexPath: IndexPath?,_ reviewModel: ReviewCellModel
+    )
+}
+
+
+typealias ReviewActionDelegate = ChangeLineDelegate & UpdateHeartPresent & DeclareEventProtocol
 
 
 class ViewController: UIViewController {
     
-    let dummyProfileModel = ProfileModel(image: "profileImage", name: "ParkHyeongHwan", followingCount: 1250000, followerCount: 2500)
-    var reviewModels = [ ReviewModel(lineFlag: false,content: "prakrkasfjkfal;"),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false),ReviewModel(lineFlag: false),ReviewModel(lineFlag: false), ReviewModel(lineFlag: false)]
+    let dummyProfileModel = ProfileModel(image: "profileImage",
+                                         name: "Hwan",
+                                         followingCount: 1250000,
+                                         followerCount: 2500)
     
+    let viewModel: ViewModelType
     
     private lazy var collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: ReviewCell.identify)
-        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.identify)
-        collectionView.register(ReviewCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader , withReuseIdentifier: ReviewCollectionViewHeader.identify)
+        collectionView.settingCollectionView()
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        collectionView.reloadData()
         return collectionView
     }()
     
-
+    init(viewModel: ViewModelType = ViewModel()) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .tertiarySystemBackground
         configure()
-        
     }
 
 
 }
 private extension ViewController{
     func configure() {
-        
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.trailing.leading.bottom.equalToSuperview()
         }
-        
     }
 }
+
 extension ViewController: UICollectionViewDelegateFlowLayout{
     
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+            
             let width = UIScreen.main.bounds.width
 
             switch ViewSection(rawValue: section){
             case .profile:
                 return CGSize()
             case .review:
-                return CGSize(width: width, height: 120)
+                return CGSize(width: width, height: 80)
             default:
-                assert(false, "headerInSection Error")
+                break
+                
             }
+            return CGSize()
         }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(10)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        
+        let width = UIScreen.main.bounds.width
+        
+        switch ViewSection(rawValue: section){
+        case .profile:
+            return CGSize(width: width, height: 65)
+        case .review:
+            return CGSize()
+        default:
+            break
+        }
+        return CGSize()
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(16)
-    }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -94,7 +126,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
             let width = collectionView.frame.size.width
             reviewCell.contentView.bounds.size.width = width
     
-            reviewCell.calculateViewHeight( indexPath, reviewModels[indexPath.row])
+            reviewCell.calculateViewHeight( indexPath,
+                                            viewModel.getCellData(indexPath.row))
             
             reviewCell.contentView.setNeedsLayout()
             reviewCell.contentView.layoutIfNeeded()
@@ -110,25 +143,40 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
-extension ViewController: ReviewCellDelegate{
-    func updateHeartPresent(_ indexPath: IndexPath?, _ reviewModel: ReviewModel?) {
+extension ViewController: UpdateHeartPresent{
+    func updateHeartPresent(_ indexPath: IndexPath?, _ reviewModel: ReviewCellModel?) {
         guard let index = indexPath else {print("updateHeartPresent indexPath error"); return}
-        guard let reviewModel = reviewModel else {print("updateHeartPresent not error"); return}
-        self.reviewModels[index.row] = reviewModel
+        viewModel.updateCellData(index.row, reviewModel)
         self.collectionView.reloadData()
     }
+}
     
+extension ViewController: ChangeLineDelegate{
     
-    func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewModel?) {
+    func changeReviewContentLine(_ indexPath: IndexPath?,_ reviewModel: ReviewCellModel?) {
         guard let index = indexPath else {print("ReviewLineChangeDelegate indexPath error"); return}
-        self.reviewModels[index.row] = reviewModel!
-        collectionView.performBatchUpdates({}) { _ in
-            self.collectionView.reloadItems(at: [index] )
-//            self.collectionView.layoutIfNeeded()
-           }
+        viewModel.updateCellData(index.row, reviewModel)
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.performBatchUpdates({}) { _ in
+                self?.collectionView.reloadItems(at: [index] )
+            }
+        }
         
     }
 }
+extension ViewController: DeclareEventProtocol{
+    
+    func declareTappedEvent(_ indexPath: IndexPath?, _ reviewModel: ReviewCellModel) {
+        let sheet = UIAlertController(title: "신고창", message: "신고하시겠습니까?\n\(reviewModel.reviewCellTitleData.storeTitleName)\n\(reviewModel.reviewCellTitleData.storeTitleRegion)", preferredStyle: .alert)
+        sheet.addAction(UIAlertAction(title: "Yes!", style: .destructive, handler: { _ in print("yes 클릭") }))
+                
+        sheet.addAction(UIAlertAction(title: "No!", style: .cancel, handler: { _ in print("yes 클릭") }))
+        present(sheet, animated: true)
+    }
+    
+}
+
+
 
 
 
@@ -152,7 +200,7 @@ extension ViewController: UICollectionViewDataSource{
         case .profile:
             return 1
         case .review:
-            return reviewModels.count
+            return viewModel.numberOfReviewCellData()
         default:
             return 0
         }
@@ -161,10 +209,16 @@ extension ViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
        
         switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ProfileStarRatingFooterView.identify, for: indexPath)
+                return footerView
+            
         case UICollectionView.elementKindSectionHeader:
             
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReviewCollectionViewHeader.identify, for: indexPath)
-                return headerView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReviewCellHeaderView.identify, for: indexPath)
+            return headerView
+            
         default:
             assert(false)
         }
@@ -183,7 +237,7 @@ extension ViewController: UICollectionViewDataSource{
             
         case .review:
             guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCell.identify, for: indexPath) as? ReviewCell else {print("review cell nil"); return UICollectionViewCell()}
-            cell.updateSettingUI(self,indexPath,reviewModels[indexPath.row])
+            cell.updateSettingUI(self,indexPath,viewModel.getCellData(indexPath.row))
             
             return cell
         default :
@@ -192,11 +246,3 @@ extension ViewController: UICollectionViewDataSource{
     }
 }
 
-
-extension UICollectionView {
-    var widestCellWidth: CGFloat {
-        let insets = contentInset.left + contentInset.right
-        
-        return bounds.width - insets
-    }
-}

@@ -168,6 +168,7 @@ extension ProfileView {
         [followingLabelName,followingCountLabel].forEach{
             self.followingStackview.addArrangedSubview($0)
         }
+        
         [followerLabelName,followerCountLabel].forEach{
             self.followerStackview.addArrangedSubview($0)
         }
@@ -187,8 +188,10 @@ extension ProfileView {
         
         introduceLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(29)
+            $0.trailing.equalToSuperview().inset(29)
             $0.top.equalTo(containerStackView.snp.bottom).offset(34)
         }
+        
         followButton.snp.makeConstraints{
             $0.top.equalTo(introduceLabel.snp.bottom).offset(40)
             $0.height.equalTo(40)

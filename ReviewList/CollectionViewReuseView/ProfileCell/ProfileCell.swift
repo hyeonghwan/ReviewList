@@ -29,7 +29,6 @@ class ProfileCell: UICollectionViewCell {
     }
     
     func updateCellComponent(_ profileModel :ProfileModel) {
-        
         self.profileView.updateCellContent(profileModel)
     }
     

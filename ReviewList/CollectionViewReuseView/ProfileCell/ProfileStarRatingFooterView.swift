@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class ReviewCollectionViewHeader: UICollectionReusableView{
+class ProfileStarRatingFooterView: UICollectionReusableView{
     
     private lazy var separatorLine: SeparatorLine = {
         let view = SeparatorLine()

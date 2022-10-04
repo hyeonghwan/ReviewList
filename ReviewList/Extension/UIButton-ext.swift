@@ -22,13 +22,5 @@ extension UIButton {
         self.layer.cornerRadius = 16
     }
     
-    func settingBubbleButton() {
-        
-    }
-    
-    func settingDeclareButton() {
-        
-    }
-    
     
 }

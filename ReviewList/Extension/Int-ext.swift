@@ -9,11 +9,7 @@ import Foundation
 
 
 extension Int {
-//    print(String(format: "%.2f", heightSlider.value))
-//
-//
-//    print(String(format: "%.2f", 145.332)) // 출력값 145.33
-//    print(String(format: "%.2f", 145.0)) // 출력값 145.00
+
     func toString() -> String {
         let result: String
         

@@ -11,30 +11,32 @@ import SnapKit
 
 class HBDActionView: UIView {
     
-    private var heartDelegate: ReviewCellDelegate?
+    private var heartDelegate: ReviewActionDelegate?
     private var heart: Bool? {
         didSet{
             heartButton.isSelect = self.heart!
         }
     }
-    private var reviewModel: ReviewModel?
+    
+    private var delclareDelegate: ReviewActionDelegate?
+    
+    private var reviewModel: ReviewCellModel?
     private var indexPath: IndexPath?
     
-    func updateHeart(_ delegate: ReviewCellDelegate,_ indexPath: IndexPath, _ reviewModel: ReviewModel) {
+    func updateHeart(_ delegate: ReviewActionDelegate,_ indexPath: IndexPath, _ reviewModel: ReviewCellModel) {
         self.heart = reviewModel.heart
         self.heartDelegate = delegate
+        self.delclareDelegate = delegate
         self.reviewModel = reviewModel
         self.indexPath = indexPath
     }
     
     lazy var heartButton: HeartButton = {
         let button = HeartButton()
-        
-        if self.heart == true{
-            button.setBackgroundImage(UIImage(named: "heart.fill"), for: .normal)
-        }else{
-            button.setBackgroundImage(UIImage(named: "heart"), for: .normal)
-        }
+        self.heart == true ?
+        button.setBackgroundImage(UIImage(named: "heart.fill"), for: .normal)
+        :
+        button.setBackgroundImage(UIImage(named: "heart"), for: .normal)
         
         return button
     }()
@@ -42,7 +44,7 @@ class HBDActionView: UIView {
     private lazy var heartCount: UILabel = {
         let label = UILabel()
         label.settingRating()
-        label.text = "23"
+        label.text = 1200.toString()
         return label
     }()
     
@@ -58,19 +60,18 @@ class HBDActionView: UIView {
     private lazy var bubleCount: UILabel = {
         let label = UILabel()
         label.settingRating()
-        label.text = "0"
+        label.text = 1300.toString()
         return label
     }()
     
     private lazy var declareButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .white
+        button.tintColor = .lightGray
         button.backgroundColor = .clear
         button.setImage(UIImage(systemName: "xmark.app"), for: .normal)
         if #available(iOS 13.0, *){
             button.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
         }
-        
         return button
     }()
     
@@ -106,16 +107,22 @@ class HBDActionView: UIView {
         super.init(frame: frame)
         configure()
         heartButton.addTarget(self, action: #selector(heartTapped(_ :)), for: .touchUpInside)
+        declareButton.addTarget(self, action: #selector(declareButtonTapped(_ :)), for: .touchUpInside)
         
     }
     
     required init?(coder: NSCoder) {
         fatalError("required init fatalError")
     }
+    @objc func declareButtonTapped(_ sender: UIButton){
+        self.delclareDelegate?.declareTappedEvent(self.indexPath, self.reviewModel!)
+    }
     
     @objc func heartTapped(_ sender: UIButton){
         
-        if var heart = heart {
+        heartCount.text = (1...3000).randomElement()!.toString()
+        
+        if heart != nil {
             self.heart?.toggle()
             let generator = UIImpactFeedbackGenerator(style: .soft)
             generator.impactOccurred()
@@ -160,9 +167,10 @@ private extension HBDActionView {
         }
         
         declareButton.snp.makeConstraints{
-            $0.top.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(30)
             $0.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview()
+            
         }
         
         

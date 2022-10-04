@@ -10,15 +10,15 @@ import UIKit
 
 
 
-protocol Identifiable {
+protocol IdentifiableProtocol {
     static var identify: String {get}
 }
 
-extension Identifiable{
+extension IdentifiableProtocol{
     static var identify: String {
         return String(describing: Self.self)
     }
 }
 
-extension UICollectionViewCell: Identifiable{ }
-extension UICollectionReusableView: Identifiable { }
+extension UICollectionViewCell: IdentifiableProtocol{ }
+extension UICollectionReusableView: IdentifiableProtocol { }
