@@ -161,9 +161,7 @@ private extension ReviewCell {
         }
         reviewTitle.snp.makeConstraints{
             $0.top.equalTo(titleView.snp.bottom).offset(24)
-            $0.width.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(25)
         }
         
         vStackView.snp.makeConstraints{

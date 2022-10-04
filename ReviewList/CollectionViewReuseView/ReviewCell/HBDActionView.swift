@@ -33,7 +33,6 @@ class HBDActionView: UIView {
     
     lazy var heartButton: HeartButton = {
         let button = HeartButton()
-        
         self.heart == true ?
         button.setBackgroundImage(UIImage(named: "heart.fill"), for: .normal)
         :
@@ -73,7 +72,6 @@ class HBDActionView: UIView {
         if #available(iOS 13.0, *){
             button.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
         }
-        
         return button
     }()
     
@@ -169,9 +167,10 @@ private extension HBDActionView {
         }
         
         declareButton.snp.makeConstraints{
-            $0.top.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(30)
             $0.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview()
+            
         }
         
         

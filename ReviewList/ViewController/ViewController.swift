@@ -97,8 +97,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
             case .review:
                 return CGSize(width: width, height: 80)
             default:
-                assert(false, "headerInSection Error")
+                break
+                
             }
+            return CGSize()
         }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
@@ -110,9 +112,9 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
         case .review:
             return CGSize()
         default:
-            assert(false, "headerInSection Error")
+            break
         }
-        
+        return CGSize()
     }
 
     
